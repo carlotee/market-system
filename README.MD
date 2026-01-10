@@ -1,3 +1,5 @@
+PROYECTO EN PROCESO/NO TERMINADO AUN
+
 Este proyecto utiliza una base de datos MySQL llamada market_db.
 
 📌 Requisitos : MySQL 9.x , phpMyAdmin 5.2.1 o superior,PHP 8.3.x

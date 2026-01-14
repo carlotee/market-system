@@ -1,19 +1,10 @@
-// backend/database/db.js
-const mysql = require('mysql2');
+import mysql from 'mysql2/promise';
 
-const connection = mysql.createConnection({
+export const db = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'market_db'
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error conectando a la BD:', err);
-    return;
-  }
-  console.log('¡Conectado exitosamente a MySQL!');
-});
-
-module.exports = connection;
+console.log('✅ Conectado a MySQL');

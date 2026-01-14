@@ -1,14 +1,18 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+import usuariosRoutes from './routes/usuarios.routes.js';
+
+dotenv.config();
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/test', (req, res) => {
-  res.json({ mensaje: 'Backend market_web funcionando 🚀' });
-});
+app.use('/api/usuarios', usuariosRoutes);
 
 app.listen(3000, () => {
-  console.log('Backend corriendo en http://localhost:3000');
+  console.log('Servidor corriendo en http://localhost:3000');
 });

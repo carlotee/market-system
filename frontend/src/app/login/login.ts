@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css'
 })
 export class Login {
 
@@ -19,8 +19,6 @@ export class Login {
   login() {
     console.log('Correo:', this.correo);
     console.log('Password:', this.password);
-
-    // aquí luego conectarás con Node.js y veras que funcionara :V
     alert('Login funcionando');
   }
 

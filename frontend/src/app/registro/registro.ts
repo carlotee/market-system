@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../services/usuarios.service';
+import { RolesService } from '../services/roles.service';
+
 
 @Component({
   selector: 'app-registro',
@@ -10,41 +12,58 @@ import { UsuariosService } from '../services/usuarios.service';
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
-export class Registro {
+export class Registro implements OnInit {
 
   nombre = '';
   apellido = '';
-  correo = '';
+  email = '';
   password = '';
   telefono = '';
+  rol_id: number | null = null;
+
+  roles = [
+    { id: 1, nombre: 'Cliente' },
+    { id: 2, nombre: 'Vendedor' },
+    { id: 3, nombre: 'Trabajador' },
+    { id: 4, nombre: 'Administrador' }
+  ];
+
 
   constructor(
     private router: Router,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private rolesService: RolesService
   ) {}
+
+  ngOnInit() {
+    this.rolesService.obtenerRoles().subscribe((data) => {
+      this.roles = data;
+    });
+  }
 
   registrar() {
     const usuario = {
       nombre: this.nombre,
       apellido: this.apellido,
-      correo: this.correo,
+      email: this.email,
       password: this.password,
-      telefono: this.telefono
+      telefono: this.telefono,
+      rol_id: this.rol_id
     };
 
+    
     this.usuariosService.registrar(usuario).subscribe({
       next: () => {
         alert('Usuario registrado');
         this.router.navigate(['/login']);
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         alert('Error al registrar');
       }
     });
   }
-
   irLogin() {
-    this.router.navigate(['/login']);
+  this.router.navigate(['/login']);
   }
 }
+
